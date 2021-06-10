@@ -1,3 +1,5 @@
+import { DatabaseService } from './core/services/database.service';
+import { Platform } from '@ionic/angular';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private platform: Platform, private database: DatabaseService) {
+    this.initializeApp();
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
+      this.database.init();
+    });
+  }
 }
